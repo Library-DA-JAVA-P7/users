@@ -38,6 +38,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
         this.userService = userService;
         this.environment = environment;
         super.setAuthenticationManager(authenticationManager);
+        super.setAuthenticationFailureHandler(new JWTAuthenticationFailureHandler());
     }
 
     @Override

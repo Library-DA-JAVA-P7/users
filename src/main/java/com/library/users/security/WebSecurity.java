@@ -26,7 +26,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable(); //disable for JWT
-        http.authorizeRequests().antMatchers("/**").hasIpAddress(environment.getProperty("gateway.ip"))
+        http.authorizeRequests().antMatchers("/**").permitAll()
         .and().addFilter(getAuthenticationFilter());
         http.headers().frameOptions().disable();
 
