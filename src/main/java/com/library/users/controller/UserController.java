@@ -2,6 +2,7 @@ package com.library.users.controller;
 
 
 
+import com.library.users.error.UserServiceException;
 import com.library.users.model.request.UpdateUserDetailsRequestModel;
 import com.library.users.model.request.UserDetailsRequestModel;
 import com.library.users.model.response.UserResponseModel;
@@ -64,6 +65,11 @@ public class UserController {
     } )
     public ResponseEntity createUser(@Valid @RequestBody UserDetailsRequestModel userDetails)
     {
+        if (userService.userEmailExist(userDetails.getEmail())){
+            throw  new UserServiceException(userDetails.getEmail()+" already exists");
+        }
+
+
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
         UserDto userDto = modelMapper.map(userDetails, UserDto.class);

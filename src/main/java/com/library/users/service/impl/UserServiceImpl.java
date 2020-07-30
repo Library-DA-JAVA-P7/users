@@ -104,4 +104,8 @@ public class UserServiceImpl implements UserService {
 
         return new ModelMapper().map(userEntity, UserDto.class);
     }
+
+    public Boolean userEmailExist(String email){
+        return userRespository.findByEmail(email) != null;
+    }
 }
